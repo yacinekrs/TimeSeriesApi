@@ -2,10 +2,11 @@ package com.TimeSeries.api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.util.Date;
 
 @Entity
-
+@Data
 public class SeriesEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
