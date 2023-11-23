@@ -11,7 +11,7 @@ public class Api {
 
     @GetMapping(path = "serie")
     public String hello() {
-        return " hello world ";
+        return " hello customer ";
     }
     @PostMapping(path = "serie")
     public void addSerie()
