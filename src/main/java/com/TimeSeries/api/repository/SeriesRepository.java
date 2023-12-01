@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface TimeSeriesRepository extends CrudRepository<Serie,Long> {
+public interface SeriesRepository extends CrudRepository<SeriesInfo, Long> {
 
 }
