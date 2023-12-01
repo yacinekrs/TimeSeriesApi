@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface SeriesRepository extends CrudRepository<SeriesInfo, Long> {
+public interface SeriesRepository extends CrudRepository<Serie, Long> {
 
 }

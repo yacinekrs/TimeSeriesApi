@@ -15,20 +15,20 @@ import java.util.Optional;
 public class Api {
     @Autowired
     SeriesService service;
-    @GetMapping(path = "serie")
 
-    public String hello() {
-        Optional<Serie> serie = service.getSerie(2);
+    @GetMapping(path = "test")
+    public String test() {
+        Optional<Serie> serie = service.getSerie(1);
         System.out.println(serie.get());
-        if(serie.get()!=null){
+        if (serie.get() != null) {
             Serie serie2 = serie.get();
             return serie2.toString();
         }
-        return "1" ;
+        return "1";
     }
+
     @PostMapping(path = "serie")
-    public void addSerie()
-    {
+    public void addSerie() {
 
     }
 }
