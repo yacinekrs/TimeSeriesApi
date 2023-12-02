@@ -19,4 +19,6 @@ public class Event {
 
     @Column(name="valeur")
     private int value;
+    @Column(name="id_serie")
+    private long id_serie;
 }

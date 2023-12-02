@@ -1,12 +1,12 @@
 package com.TimeSeries.api.service;
 
-import com.TimeSeries.api.model.Event;
 import com.TimeSeries.api.model.Serie;
 import com.TimeSeries.api.repository.SeriesRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Data
@@ -32,6 +32,16 @@ public class SeriesService {
         serie.setTitle(title);
         serie.setDescription(description);
         timeSeriesRepository.save(serie);
+    }
+    public Serie updateSerie(Long id, Serie updatedSerie) {
+        Optional<Serie> existingSerie = timeSeriesRepository.findById(id);
+
+        if (existingSerie.isPresent()) {
+            updatedSerie.setSerieId(id);
+            return timeSeriesRepository.save(updatedSerie);
+        } else {
+             throw new NoSuchElementException("the element doesnot exist ");
+        }
     }
 }
 
