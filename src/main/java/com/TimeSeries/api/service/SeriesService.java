@@ -1,5 +1,6 @@
 package com.TimeSeries.api.service;
 
+import com.TimeSeries.api.model.Event;
 import com.TimeSeries.api.model.Serie;
 import com.TimeSeries.api.repository.SeriesRepository;
 import lombok.Data;
@@ -14,10 +15,24 @@ public class SeriesService {
 
     @Autowired
     private SeriesRepository timeSeriesRepository;
-    public Optional<Serie> getSerie(final long id){
+    public Iterable<Serie> getSeries() {
+        return timeSeriesRepository.findAll();
+    }
+    public Optional<Serie> getSerieById(long id){
         return timeSeriesRepository.findById(id);
     }
-
+    public void deleteSerieById(Long id) {
+        timeSeriesRepository.deleteById(id);
+    }
+    public void deleteSerie(Serie serie) {
+        timeSeriesRepository.delete(serie);
+    }
+    public void addSerie(String title, String description){
+        Serie serie = new Serie();
+        serie.setTitle(title);
+        serie.setDescription(description);
+        timeSeriesRepository.save(serie);
+    }
 }
 
 

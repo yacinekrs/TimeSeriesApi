@@ -1,6 +1,7 @@
 package com.TimeSeries.api.service;
 
 import com.TimeSeries.api.model.Event;
+import com.TimeSeries.api.model.Serie;
 import com.TimeSeries.api.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class EventService {
     public Iterable<Event> getEvents() {
         return eventRepository.findAll();
     }
-    public Optional<Event> getEventById(Long id) {
+    public Optional<Event> getEventById(long id) {
         return eventRepository.findById(id);
     }
     public void deleteEventById(Long id) {

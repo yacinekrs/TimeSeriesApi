@@ -8,12 +8,15 @@ import java.sql.Date;
 @Entity
 @Table(name = "event")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="event_id")
     private Long eventId;
+
     @Column(name="date")
     private Date date;
+
     @Column(name="valeur")
     private int value;
 }

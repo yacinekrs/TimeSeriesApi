@@ -14,8 +14,10 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="serie_id")
     private Long serieId;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "description")
     private String description;
 
@@ -24,7 +26,4 @@ public class Serie {
             fetch = FetchType.EAGER)
     @JoinColumn(name = "id_serie")
     List<Event> event = new ArrayList<>();
-
-
-
 }
