@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    tr,td{
+        border: black 2px solid;
+    }
+</style>
 <body>
 <h2>Serie: </h2>
-<h2 th:text="${serieid}"></h2>
-<h4 th:text="${seriedescription}">    </h4>
-<h4 th:text="${serietitle}"></h4>
+<h2 th:text="${serieid}" ></h2>
+<h4 th:text="${seriedescription}" th:text="${serietitle}">    </h4>
 
-<ul th:each="item : ${serieevents}">
+<table>
+<tr th:each="item : ${serieevents}">
 
-    <li th:text="${item.date}" ></li>
-    <li th:text="${item.value}" ></li>
+    <td th:text="${item.date}" ></td>
+    <td th:text="${item.value}" ></td>
     <!-- Add other fields as needed -->
-</ul>
+</tr>
+</table>
 </body>
 </html>
