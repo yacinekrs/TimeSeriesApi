@@ -29,7 +29,13 @@ public class Serie {
     @JoinColumn(name = "id_serie")
     List<Event> event = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "series")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn (name = "users")
     private Set<User> users = new HashSet<>();
+
+    public void addUser (User user)
+    {
+        this.users.add(user);
+    }
 
 }

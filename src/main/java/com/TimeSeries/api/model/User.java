@@ -17,13 +17,15 @@ import java.util.Set;
     @Column(name = "mdps")
     private String password; // In a real-world application, consider using password hashing
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_series",
-            joinColumns = @JoinColumn(name = "nom_util"),
-            inverseJoinColumns = @JoinColumn(name = "serie_id"))
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Series")
     private Set<Serie> series = new HashSet<>();
         // getters and setters
+    public void addSerie (Serie serie)
+    {
+        this.series.add(serie);
     }
+}
+
 
 
