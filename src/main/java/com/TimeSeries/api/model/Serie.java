@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -17,25 +15,22 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="serie_id")
     private Long serieId;
-
     @Column(name = "title")
     private String title;
-
     @Column(name = "description")
     private String description;
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_serie")
+    @JoinColumn()
     List<Event> event = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn (name = "users")
-    private Set<User> users = new HashSet<>();
+  @ElementCollection
+  @Column(name = "series")
 
-    public void addUser (User user)
-    {
-        this.users.add(user);
-    }
+  private List<String> users ;
 
+  public void addUser(String username){
+   this.users.add(username);
+  }
 }

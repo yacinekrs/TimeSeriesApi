@@ -9,17 +9,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * crud controller for adding, deleting, updating and deleting Events
+ */
 @RestController
 @RequestMapping(path = "api/events")
+
 public class EventApi {
     @Autowired
     EventService eventService;
 
     @GetMapping("{id}")
-    public ResponseEntity<Event> testEvent(@PathVariable long id) {
+    public ResponseEntity<Event> GetEvent(@PathVariable long id) {
         Optional<Event> event = eventService.getEventById(id);
         if (event.isPresent()) return new ResponseEntity<>(event.get(),HttpStatus.OK);
         else return new ResponseEntity<>(event.get(),HttpStatus.NOT_FOUND);
+    }
+    @GetMapping()
+    public ResponseEntity<Object> getEvents() {
+        Iterable<Event> event = eventService.getEvents();
+        return new ResponseEntity<>(event,HttpStatus.OK);
     }
 
     @PostMapping()

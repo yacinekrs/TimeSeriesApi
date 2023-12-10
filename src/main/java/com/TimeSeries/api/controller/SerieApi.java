@@ -1,6 +1,8 @@
 package com.TimeSeries.api.controller;
 
 import com.TimeSeries.api.model.Serie;
+import com.TimeSeries.api.model.User;
+import com.TimeSeries.api.repository.UserRepository;
 import com.TimeSeries.api.service.SeriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,14 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.*;
+
 
 @Controller
 @RequestMapping("api/series")
 public class SerieApi {
     @Autowired
     SeriesService seriesService;
-
+    @Autowired
+    UserRepository userRepository;
     @GetMapping(value = "{id}", produces = {MediaType.TEXT_HTML_VALUE})
     public String getSerie(@PathVariable long id,  Model model) {
         Optional<Serie> serie = seriesService.getSerieById(id);
@@ -70,5 +74,19 @@ public class SerieApi {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping(value = "/{id}/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getSerieUsers(@PathVariable long id,  Model model) {
+        Optional<Serie> serieOpt = seriesService.getSerieById(id);
+        Serie serie = null ;
+        List<String> userSet = new ArrayList<>();
+        Iterable<User> users = new ArrayList<>();
+        if (serieOpt.isPresent()){
+            serie = serieOpt.get();
+            userSet =  serie.getUsers();
+            users = userRepository.findAllByIdIn((List<String>) userSet);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        }
+        else return new ResponseEntity<>("the serie doesn't exist", HttpStatus.NOT_FOUND);
     }
 }
